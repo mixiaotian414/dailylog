@@ -8,6 +8,12 @@ create tablespace GLJY_JX_DL datafile '/home/oracle/app/oracle/oradata/ORCL/gljy
 create tablespace GLJY_JX_DL datafile '/oracle/oradata/GLJYJX/gljy_jx_dl.dbf' size 100M autoextend on next 50m maxsize 2048m ;
 
 CREATE USER gljy_jx_dl IDENTIFIED BY gljy_jx_dl DEFAULT TABLESPACE GLJY_JX_DL;
+GRANT CREATE SEQUENCE TO "GLJY_JX_DL";
+GRANT CREATE VIEW TO "GLJY_JX_DL";
+GRANT CREATE TABLE TO "GLJY_JX_DL"
+GRANT CREATE SESSION TO "GLJY_JX_DL";
+ GRANT "DBA" TO "GLJY_JX_DL"
+ALTER USER "GLJY_JX_DL" DEFAULT ROLE ALL;
 grant connect,resource to gljy_jx_dl;
 
 grant unlimited tablespace to gljy_jx_dl;
@@ -25,6 +31,8 @@ grant read, write on directory gljy_jx_dl  to gljy_jx_dl;
 
 /home/oracle/data/gljy_jx20230216.dmp
 
-impdp gljy_jx_dl/gljy_jx_dl directory=GLJY_JX_DL dumpfile=gljy_jx20230216.dmp full=y;
+impdp gljy_jx_dl/gljy_jx_dl directory=GLJY_JX_DL dumpfile=gljy_jx20230217_1.dmp full=y;
 
-expdb gljy_jx_dl/gljy_jx_dl directory=GLJY_JX_DL dumpfile=12c_gljy_jx20230216.dmp full=y version=12.2.0.1.0
+expdb gljy_jx_dl/gljy_jx_dl directory=GLJY_JX_DL dumpfile=gljy_jx20230217_1.dmp full=y version=12.2.0.1.0
+
+impdp gljy_jx_dl/gljy_jx_dl DIRECTORY=GLJY_JX_DL DUMPFILE=gljy_jx20230217_1.dmp REMAP_SCHEMA=GLJY_JX:gljy_jx_dl
