@@ -1,0 +1,97 @@
+Css相关
+一、介绍下盒模型
+标准模型：width/height = content 的宽高
+IE 模型：width/height = content + padding + border 的宽高
+设置两种模型的方式：
+box-sizing: content-box // 标准模型 默认
+box-sizing: border-box // IE 模型
+二、CSS选择器有哪些？哪些属性可以继承？
+CSS选择符：
+id选择器(#myid)、
+类选择器(.myclassname)、
+标签选择器(div, h1, p)、
+相邻选择器(h1 + p)、
+子选择器（ul > li）、
+后代选择器（li a）、
+通配符选择器（*）、
+属性选择器（a[rel="external"]）、
+伪类选择器（a:hover, li:nth-child） 
+可继承的属性：font-size, font-family, color 
+不可继承的样式：border, padding, margin, width, height 
+优先级（就近原则）：!important > [ id > class > tag ] !important 比内联优先级高
+三、请列举几个清除浮动的方法
+1）使用clear属性
+<div style="clear:both"></div>
+（2）使用br标签和其自身的HTML属性
+<br clear="all" />
+（3）通过设置父元素的样式，实现清除浮动，例如：
+父元素设置 overflow:hidden
+父元素设置 overflow:auto
+父元素设置 display:table
+父元素也设置浮动样式
+（4）使用 :after 伪元素
+四、display有哪些值？说明他们的作用? 
+inline（默认）--内联 none--隐藏 block--块显示 table--表格显示 list-item--项目列表 inline-block。
+其作用如下。block是指块类型。默认宽度为父元素宽度，可设置宽高，换行显示。   none是指元素不会显示，已脱离文档流。inline是指行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。inline- block是指默认宽度为内容宽度，可以设置宽高，同行显示。list-item是指像块类型元素一样显示，并添加样式列表标记。table是指此元素会作为块级表格显示。inherit是指从父元素继承 display属性的值。
+五、position的值及说明
+relative表示相对定位，相对于自己本身所在正常文档流中的位置进行定位。absolute表示绝对定位，相对于最近一级（从直接父级元素往上数，直到根元素）定位，相对于 statIc的父元素进行定位。fixed用于生成绝对定位，相对于浏览器窗口或 frame进行定位。statIc是默认值，没有定位，元素出现在正常的文档流中。sticky是生成黏性定位的元素，容器的位置根据正常文档流计算得出。
+六、CSS3有哪些新特性？
+RGBA和透明度
+background-image 
+background-origin(content-box/padding-box/border-box) 
+background-size background-repeat
+word-wrap（对长的不可分割单词换行）word-wrap：break-word
+文字阴影：text-shadow： 5px 5px 5px #FF0000;（水平阴影，垂直阴影，模糊距离，阴影颜色）
+font-face属性：定义自己的字体
+圆角（边框半径）：border-radius 属性用于创建圆角
+边框图片：border-image: url(border.png) 30 30 round
+盒阴影：box-shadow: 10px 10px 5px #888888
+媒体查询：定义两套css，当浏览器的尺寸变化时会采用不同的属性
+七、为什么要初始化CSS
+因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没有初始化CSS，往往会导致页面在不同浏览器之间出现差异。当然，初始化样式有时会对SEO产生一定的影响，但鱼和熊掌不可兼得，所以在力求影响最小的情况下初始化CSS。最简单的初始化方法就是：*{ padding：0；margin：0；}
+八、对BFC规范(块级格式化上下文：block formatting context)的理解？
+BFC规定了内部的Block Box如何布局。 定位方案：
+内部的Box会在垂直方向上一个接一个放置。
+Box垂直方向的距离由margin决定，属于同一个BFC的两个相邻Box的margin会发生重叠。
+每个元素的margin box 的左边，与包含块border box的左边相接触。
+BFC的区域不会与float box重叠。
+BFC是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。
+计算BFC的高度时，浮动元素也会参与计算。
+九、px和em、rem
+px和em都是长度单位，两者的区别是：px的值是固定的，指定为多少就是多少，计算比较容易；em的值不是国定的，是相对于容器字体的大小，并且em会继承父级元素的字体大小。
+浏览器的默认字体高都是16px，所以未经调整的浏览器都符合lem=16px，那么12px=0.75em，10px=0.625em。
+与em对应的另一个长度单位是rem，是指相对于根元素（通常是HTML元素）字体的大小。
+十、rgba0和 opacity的透明效果有什么不同？
+rgba()和 opacity都能实现透明效果，但它们最大的不同是 opacity作用于元素，并且可以设置元素内所有内容的透明度；而 rgba()只作用于元素的颜色或其背景色（设置rgba透明的元素的子元素不会继承透明效果）。
+十一、Flex布局
+flex-direction：决定主轴的方向（即子item的排列方法）
+.box {
+flex-direction: row | row-reverse | column | column-reverse;
+}
+flex-wrap：决定换行规则
+.box{
+flex-wrap: nowrap | wrap | wrap-reverse;
+}
+flex-flow：
+.box {
+flex-flow: <flex-direction> || <flex-wrap>;
+}
+justify-content：对其方式，水平主轴对齐方式
+align-items：对齐方式，竖直轴线方向
+项目的属性（元素的属性）：
+order属性：定义项目的排列顺序，顺序越小，排列越靠前，默认为0
+flex-grow属性：定义项目的放大比例，即使存在空间，也不会放大
+flex-shrink属性：定义了项目的缩小比例，当空间不足的情况下会等比例的缩小，如果定义个item的flow-shrink为0，则为不缩小
+flex-basis属性：定义了在分配多余的空间，项目占据的空间。
+flex：是flex-grow和flex-shrink、flex-basis的简写，默认值为0 1 auto。
+align-self：允许单个项目与其他项目不一样的对齐方式，可以覆盖align-items，默认属性为auto，表示继承父元素的align-items
+十二、垂直水平居中
+对于行内块级元素，
+1、父级元素设置text-alig：center，然后设置line-height和vertical-align使其垂直居中，最后设置font-size：0消除近似居中的bug
+2、父级元素设置display：table-cell，vertical-align：middle达到水平垂直居中
+3、采用绝对定位，原理是子绝父相，父元素设置position：relative，子元素设置position：absolute，然后通过transform或margin组合使用达到垂直居中效果，设置top：50%，left：50%，transform：translate（-50%，-50%）
+4、绝对居中，原理是当top,bottom为0时，margin-top&bottom设置auto的话会无限延伸沾满空间并平分，当left，right为0时,margin-left&right设置auto会无限延伸占满空间并平分，
+5、采用flex，父元素设置display：flex，子元素设置margin：auto
+6、视窗居中，vh为视口单位，50vh即是视口高度的50/100，设置margin：50vh auto 0，transform：translate(-50%)
+隐藏页面中某个元素的方法
+display:none; visibility:hidden; opacity: 0; position移到外部，z-index涂层遮盖等等
